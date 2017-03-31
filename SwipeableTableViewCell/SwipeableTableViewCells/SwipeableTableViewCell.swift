@@ -29,7 +29,11 @@ class SwipeableTableViewCell: UITableViewCell {
   
   // MARK: - Variables
   
-  weak var delegate: SwipeableTableViewCellDelegate?
+  weak var delegate: SwipeableTableViewCellDelegate? {
+    didSet {
+      setUpButtons()
+    }
+  }
   
   @IBOutlet weak var scrollView: UIScrollView!
   @IBOutlet weak var scrollViewLabel: UILabel!
@@ -62,31 +66,6 @@ class SwipeableTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     setUp()
-  }
-  
-  // MARK: - Functions
-  
-  func addButton(_ button: UIButton, to side: Side) {
-    let container = buttonViews[side.rawValue]
-    let size = container.bounds.size
-    let buttonWidth = button.bounds.width
-    
-    // Update the button frame
-    button.frame = CGRect(x: size.width, y: 0, width: buttonWidth, height: size.height)
-    
-    // Resize the container to fit the new button.
-    let resizedX: CGFloat
-    switch side {
-    case .left:
-      resizedX = -(size.width + buttonWidth)
-    case .right:
-      resizedX = contentView.bounds.size.width
-    }
-    container.frame = CGRect(x: resizedX, y: 0, width: size.width + buttonWidth, height: size.height)
-    container.addSubview(button)
-    
-    // Update the scrollable areas outside the scroll view to fit the buttons.
-    scrollView.contentInset = UIEdgeInsetsMake(0, leftInset, 0, rightInset);
   }
   
   // MARK: - Private Functions
@@ -123,23 +102,16 @@ class SwipeableTableViewCell: UITableViewCell {
   }
   
   private func setUpButtons() {
-    let yesButton = createButton(title: "Yes", backgroundColor: .green)
-    let noButton = createButton(title: "No", backgroundColor: .red)
-    let maybeButton = createButton(title: "Maybe", backgroundColor: .blue)
-    addButton(yesButton, to: .left)
-    addButton(noButton, to: .right)
-    addButton(maybeButton, to: .right)
+    let leftButtons = delegate?.swipeableTableViewCell(self, buttonsForSide: .left)
+    let rightButtons = delegate?.swipeableTableViewCell(self, buttonsForSide: .right)
     
-//    let leftButtons = delegate?.swipeableTableViewCell(self, buttonsForSide: .left)
-//    let rightButtons = delegate?.swipeableTableViewCell(self, buttonsForSide: .right)
-//    
-//    leftButtons?.forEach { (button) in
-//      self.addButton(button, to: .left)
-//    }
-//    
-//    rightButtons?.forEach { (button) in
-//      self.addButton(button, to: .right)
-//    }
+    leftButtons?.forEach { (button) in
+      self.addButton(button, to: .left)
+    }
+    
+    rightButtons?.forEach { (button) in
+      self.addButton(button, to: .right)
+    }
   }
   
   private func createButton(title: String, backgroundColor: UIColor) -> UIButton {
@@ -150,6 +122,29 @@ class SwipeableTableViewCell: UITableViewCell {
     button.setTitle(title, for: .normal)
     button.setTitleColor(.white, for: .normal)
     return button
+  }
+  
+  private func addButton(_ button: UIButton, to side: Side) {
+    let container = buttonViews[side.rawValue]
+    let size = container.bounds.size
+    let buttonWidth = button.bounds.width
+    
+    // Update the button frame
+    button.frame = CGRect(x: size.width, y: 0, width: buttonWidth, height: size.height)
+    
+    // Resize the container to fit the new button.
+    let resizedX: CGFloat
+    switch side {
+    case .left:
+      resizedX = -(size.width + buttonWidth)
+    case .right:
+      resizedX = contentView.bounds.size.width
+    }
+    container.frame = CGRect(x: resizedX, y: 0, width: size.width + buttonWidth, height: size.height)
+    container.addSubview(button)
+    
+    // Update the scrollable areas outside the scroll view to fit the buttons.
+    scrollView.contentInset = UIEdgeInsetsMake(0, leftInset, 0, rightInset);
   }
 }
 

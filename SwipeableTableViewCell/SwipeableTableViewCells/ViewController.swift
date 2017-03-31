@@ -33,8 +33,35 @@ extension ViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? SwipeableTableViewCell else { return UITableViewCell() }
     
+    cell.delegate = self
+    
     cell.scrollViewLabel.text = "\(numbers[indexPath.row])"
     return cell
   }
 }
 
+// MARK: - Swipeable Table View Cell Delegate 
+
+extension ViewController: SwipeableTableViewCellDelegate {
+  func swipeableTableViewCell(_ swipeableTableViewCell: SwipeableTableViewCell, buttonsForSide side: SwipeableTableViewCell.Side) -> [UIButton] {
+    switch side {
+    case .left:
+      let yesButton = createButton(title: "Yes", backgroundColor: .green)
+      return [yesButton]
+    case .right:
+      let noButton = createButton(title: "No", backgroundColor: .red)
+      let maybeButton = createButton(title: "Maybe", backgroundColor: .blue)
+      return [noButton, maybeButton]
+    }
+  }
+  
+  private func createButton(title: String, backgroundColor: UIColor) -> UIButton {
+    let button = UIButton(type: .custom)
+    button.autoresizingMask = .flexibleHeight
+    button.backgroundColor = backgroundColor
+    button.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
+    button.setTitle(title, for: .normal)
+    button.setTitleColor(.white, for: .normal)
+    return button
+  }
+}
