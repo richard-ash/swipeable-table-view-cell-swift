@@ -11,7 +11,7 @@
 import UIKit
 
 protocol SwipeableTableViewCellDelegate: class {
-  func swipeableTableViewCell(_ swipeableTableViewCell: SwipeableTableViewCell, buttonsForSide side: SwipeableTableViewCell.Side) -> [UIButton]
+  func swipeableTableViewCell(_ swipeableTableViewCell: SwipeableTableViewCell, buttonsForSide side: SwipeableTableViewCell.Side) -> [SwipeableTableViewCellButton]
 }
 
 class SwipeableTableViewCell: UITableViewCell {
@@ -114,17 +114,7 @@ class SwipeableTableViewCell: UITableViewCell {
     }
   }
   
-  private func createButton(title: String, backgroundColor: UIColor) -> UIButton {
-    let button = UIButton(type: .custom)
-    button.autoresizingMask = .flexibleHeight
-    button.backgroundColor = backgroundColor
-    button.frame = CGRect(x: 0, y: 0, width: 80, height: bounds.size.height)
-    button.setTitle(title, for: .normal)
-    button.setTitleColor(.white, for: .normal)
-    return button
-  }
-  
-  private func addButton(_ button: UIButton, to side: Side) {
+  private func addButton(_ button: SwipeableTableViewCellButton, to side: Side) {
     let container = buttonViews[side.rawValue]
     let size = container.bounds.size
     let buttonWidth = button.bounds.width

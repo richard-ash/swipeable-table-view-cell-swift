@@ -43,25 +43,23 @@ extension ViewController: UITableViewDataSource {
 // MARK: - Swipeable Table View Cell Delegate 
 
 extension ViewController: SwipeableTableViewCellDelegate {
-  func swipeableTableViewCell(_ swipeableTableViewCell: SwipeableTableViewCell, buttonsForSide side: SwipeableTableViewCell.Side) -> [UIButton] {
+  func swipeableTableViewCell(_ swipeableTableViewCell: SwipeableTableViewCell, buttonsForSide side: SwipeableTableViewCell.Side) -> [SwipeableTableViewCellButton] {
     switch side {
     case .left:
-      let yesButton = createButton(title: "Yes", backgroundColor: .green)
+      let yesButton = SwipeableTableViewCellButton(title: "Yes", color: .green) { (_) in
+        print("yes!")
+      }
       return [yesButton]
     case .right:
-      let noButton = createButton(title: "No", backgroundColor: .red)
-      let maybeButton = createButton(title: "Maybe", backgroundColor: .blue)
+      let noButton = SwipeableTableViewCellButton(title: "No", color: .red) { (_) in
+        print("no!")
+      }
+      
+      let maybeButton = SwipeableTableViewCellButton(title: "Maybe", color: .blue) { (_) in
+        print("maybe??")
+      }
+      
       return [noButton, maybeButton]
     }
-  }
-  
-  private func createButton(title: String, backgroundColor: UIColor) -> UIButton {
-    let button = UIButton(type: .custom)
-    button.autoresizingMask = .flexibleHeight
-    button.backgroundColor = backgroundColor
-    button.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
-    button.setTitle(title, for: .normal)
-    button.setTitleColor(.white, for: .normal)
-    return button
   }
 }

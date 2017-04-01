@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B4C00161E8F48570069ECCD /* SwipeableTableViewCellButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C00151E8F48570069ECCD /* SwipeableTableViewCellButton.swift */; };
 		8BDF96851E805A5A00C9D435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF96841E805A5A00C9D435 /* AppDelegate.swift */; };
 		8BDF96871E805A5A00C9D435 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF96861E805A5A00C9D435 /* ViewController.swift */; };
 		8BDF968A1E805A5B00C9D435 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF96881E805A5B00C9D435 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B4C00151E8F48570069ECCD /* SwipeableTableViewCellButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableTableViewCellButton.swift; sourceTree = "<group>"; };
 		8BDF96811E805A5A00C9D435 /* SwipeableTableViewCell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeableTableViewCell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BDF96841E805A5A00C9D435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BDF96861E805A5A00C9D435 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				8BDF96841E805A5A00C9D435 /* AppDelegate.swift */,
 				8BDF96861E805A5A00C9D435 /* ViewController.swift */,
 				8BDF96961E805F8800C9D435 /* SwipeableTableViewCell.swift */,
+				8B4C00151E8F48570069ECCD /* SwipeableTableViewCellButton.swift */,
 				8BDF96881E805A5B00C9D435 /* Main.storyboard */,
 				8BDF968B1E805A5B00C9D435 /* Assets.xcassets */,
 				8BDF968D1E805A5B00C9D435 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4C00161E8F48570069ECCD /* SwipeableTableViewCellButton.swift in Sources */,
 				8BDF96871E805A5A00C9D435 /* ViewController.swift in Sources */,
 				8BDF96971E805F8800C9D435 /* SwipeableTableViewCell.swift in Sources */,
 				8BDF96851E805A5A00C9D435 /* AppDelegate.swift in Sources */,
